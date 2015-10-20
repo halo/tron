@@ -1,3 +1,7 @@
+[![Gem Version](https://img.shields.io/gem/v/train.svg)](https://rubygems.org/gems/train)
+[![Build Status](https://travis-ci.org/halo/train.svg?branch=master)](https://travis-ci.org/halo/train)
+[![License](http://img.shields.io/badge/license-MIT-blue.svg)](http://github.com/halo/train/blob/master/LICENSE.md)
+
 # Train
 
 Imagine you have a class like this:
