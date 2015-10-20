@@ -140,6 +140,3 @@ Train is a complete rewrite of its predecessor [operation](https://github.com/ha
 ### Copyright
 
 MIT 2015 halo. See [MIT-LICENSE](http://github.com/halo/train/blob/master/LICENSE.md).
-
-
-
