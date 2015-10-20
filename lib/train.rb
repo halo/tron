@@ -1,6 +1,6 @@
 require 'train/version'
 
-require 'train/result'
+require 'train/resultable'
 require 'train/success'
 require 'train/failure'
 

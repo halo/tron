@@ -1,5 +1,6 @@
 module Train
-  class Failure < ::Train::Result
+  class Failure
+    include Resultable
 
     def on_success(_ = nil)
       self

@@ -1,8 +1,19 @@
 module Train
-  class Result
+  module Resultable
     attr_reader :metadata
 
-    def initialize(code = nil, metadata = nil)
+    def self.included(receiver)
+      receiver.extend ::Train::Resultable::ClassMethods
+    end
+
+    module ClassMethods
+      # Convenience wrapper
+      def call(code, metadata = nil)
+        new code: code, metadata: metadata
+      end
+    end
+
+    def initialize(code: nil, metadata: nil)
       @code     = code
       @metadata = metadata
     end

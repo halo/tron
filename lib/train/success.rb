@@ -1,5 +1,6 @@
 module Train
-  class Success < ::Train::Result
+  class Success
+    include Resultable
 
     def on_success(proc = nil, &block)
       (proc || block).call

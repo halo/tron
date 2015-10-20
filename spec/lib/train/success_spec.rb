@@ -20,8 +20,8 @@ RSpec.describe Train::Success do
     context 'chaining it with #>>' do
       it 'calls everyone in the chain and returns the last result' do
         instance      = described_class.new
-        first_result  = described_class.new(:first)
-        second_result = described_class.new(:second)
+        first_result  = described_class.call(:first)
+        second_result = described_class.call(:second)
         expect(instance.on_success { first_result }.on_success { second_result }).to be second_result
       end
     end
@@ -45,8 +45,8 @@ RSpec.describe Train::Success do
     context 'chaining it with #>>' do
       it 'does not go through the chain but returns the first result' do
         instance      = described_class.new
-        first_result  = described_class.new(:first)
-        second_result = described_class.new(:second)
+        first_result  = described_class.call(:first)
+        second_result = described_class.call(:second)
         expect(instance.on_failure { first_result }.on_failure { second_result }).to be instance
       end
     end
