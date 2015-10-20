@@ -7,8 +7,8 @@ Gem::Specification.new do |spec|
   spec.name        = 'train'
   spec.version     = ::Train::VERSION::STRING
   spec.date        = '2015-10-01'
-  spec.summary     = ''
-  spec.description = ''
+  spec.summary     = 'General-purpose method return objects that can be chained.'
+  spec.description = "General-purpose method return objects that can be chained. Heavily inspired by the `deterministic` gem, but much much more light-weight."
   spec.authors     = ['halo']
   spec.homepage    = 'https://github.com/halo/train'
 
