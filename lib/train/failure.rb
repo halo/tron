@@ -1,15 +1,15 @@
 module Train
   class Failure < ::Train::Result
 
-    def on_success(proc = nil)
+    def on_success(_ = nil)
       self
     end
-    alias :>> :on_success
+    alias_method :>>, :on_success
 
     def on_failure(proc = nil, &block)
       (proc || block).call
     end
-    alias :>> :on_failure
+    alias_method :>>, :on_failure
 
   end
 end

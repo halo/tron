@@ -22,7 +22,7 @@ module Train
 
     # Convenience Wrapper
     def object
-      meta[:object] || meta['object']
+      metadata[:object] || metadata['object']
     rescue
       nil
     end

@@ -9,16 +9,17 @@ Gem::Specification.new do |spec|
   spec.date        = '2015-10-01'
   spec.summary     = ''
   spec.description = ''
-  spec.authors     = %w{ halo }
+  spec.authors     = ['halo']
   spec.homepage    = 'https://github.com/halo/train'
 
   spec.files         = Dir['Rakefile', '{lib}/**/*', 'README*', 'LICENSE.md'] & `git ls-files -z`.split("\0")
-  spec.licenses      = %w{ MIT }
-  spec.require_paths = %w{ lib }
+  spec.licenses      = ['MIT']
+  spec.require_paths = ['lib']
 
   spec.add_development_dependency 'hashie'
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'guard-rspec'
   spec.add_development_dependency 'rb-fsevent'
+  spec.add_development_dependency 'rubocop'
 
 end
