@@ -1,9 +1,9 @@
-module Train
+module Tron
   module Resultable
     attr_reader :metadata
 
     def self.included(receiver)
-      receiver.extend ::Train::Resultable::ClassMethods
+      receiver.extend ::Tron::Resultable::ClassMethods
     end
 
     module ClassMethods
@@ -19,11 +19,11 @@ module Train
     end
 
     def success?
-      is_a? ::Train::Success
+      is_a? ::Tron::Success
     end
 
     def failure?
-      is_a? ::Train::Failure
+      is_a? ::Tron::Failure
     end
 
     def code

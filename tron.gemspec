@@ -1,16 +1,16 @@
-require File.expand_path('../lib/train/version', __FILE__)
+require File.expand_path('../lib/tron/version', __FILE__)
 
 Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.2.3'
 
-  spec.name        = 'train'
-  spec.version     = ::Train::VERSION::STRING
+  spec.name        = 'tron'
+  spec.version     = ::Tron::VERSION::STRING
   spec.date        = '2015-10-01'
   spec.summary     = 'General-purpose method return objects that can be chained.'
   spec.description = "#{spec.summary} Heavily inspired by the `deterministic` gem, but much much more light-weight."
   spec.authors     = ['halo']
-  spec.homepage    = 'https://github.com/halo/train'
+  spec.homepage    = 'https://github.com/halo/tron'
 
   spec.files         = Dir['Rakefile', '{lib}/**/*', 'README*', 'LICENSE.md'] & `git ls-files -z`.split("\0")
   spec.licenses      = ['MIT']

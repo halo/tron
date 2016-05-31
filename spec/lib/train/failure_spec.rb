@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Train::Failure do
+RSpec.describe Tron::Failure do
 
   describe '#on_success' do
     context 'passing in a proc' do

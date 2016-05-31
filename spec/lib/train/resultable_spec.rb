@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.shared_examples Train::Resultable do
+RSpec.shared_examples Tron::Resultable do
 
   describe '#metadata' do
     it 'may be nil' do
@@ -67,10 +67,10 @@ RSpec.shared_examples Train::Resultable do
 
 end
 
-RSpec.describe ::Train::Success do
-  it_behaves_like Train::Resultable
+RSpec.describe ::Tron::Success do
+  it_behaves_like Tron::Resultable
 end
 
-RSpec.describe ::Train::Failure do
-  it_behaves_like Train::Resultable
+RSpec.describe ::Tron::Failure do
+  it_behaves_like Tron::Resultable
 end

@@ -1,8 +1,8 @@
-[![Gem Version](https://img.shields.io/gem/v/train.svg)](https://rubygems.org/gems/train)
-[![Build Status](https://travis-ci.org/halo/train.svg?branch=master)](https://travis-ci.org/halo/train)
-[![License](http://img.shields.io/badge/license-MIT-blue.svg)](http://github.com/halo/train/blob/master/LICENSE.md)
+[![Gem Version](https://img.shields.io/gem/v/tron.svg)](https://rubygems.org/gems/tron)
+[![Build Status](https://travis-ci.org/halo/tron.svg?branch=master)](https://travis-ci.org/halo/tron)
+[![License](http://img.shields.io/badge/license-MIT-blue.svg)](http://github.com/halo/tron/blob/master/LICENSE.md)
 
-# Train
+# Tron
 
 Imagine you have a class like this:
 
@@ -18,11 +18,11 @@ It's not clear from the code what this method returns (`true`?, a `User`?, a use
 
 Indeed, it is not even clear what "successful" means in the context of this message - if there is no user and you try to delete one, is that considered a "failure"?
 
-Let's rewrite the method using Train:
+Let's rewrite the method using Tron:
 
 ```ruby
 class User
-  include Train
+  include Tron
 
   def self.delete(id)
     return Failure.call(:id_missing) unless id
@@ -45,7 +45,7 @@ One could even take it a step further and write it like this:
 
 ```ruby
 class User
-  include Train
+  include Tron
 
   def self.delete(id)
     # If any one of these fail, the following blocks won't be executed
@@ -79,7 +79,7 @@ end
 
 #### 1. It will give you robust and predictable code
 
-Train will give you this consistent, implementation-unaware, programming convention:
+Tron will give you this consistent, implementation-unaware, programming convention:
 
 ```ruby
 result = User.delete 42
@@ -125,7 +125,7 @@ class Product
 end
 ```
 
-You cannot simply test for the `false` as expected return value because it could mean anything. Train helps you to check the response objects for every case.
+You cannot simply test for the `false` as expected return value because it could mean anything. Tron helps you to check the response objects for every case.
 
 #### 3. It gives you documentation
 
@@ -133,9 +133,9 @@ While the code you're writing becomes slightly more verbose, that verbosity tran
 
 ### Background
 
-Train is a complete rewrite of its predecessor [operation](https://github.com/halo/operation). I got inspired by the [deterministic](https://github.com/pzol/deterministic) gem, which is the follow-up of the [monadic](https://github.com/pzol/monadic) gem.
+Tron is a complete rewrite of its predecessor [operation](https://github.com/halo/operation). I got inspired by the [deterministic](https://github.com/pzol/deterministic) gem, which is the follow-up of the [monadic](https://github.com/pzol/monadic) gem.
 
-`operation` is very useful, but the API was always a bit cumbersome. Additionally, there was no paradigm of chaining trains, i.e. run multiple trains but bail out if one of them fails.
+`operation` is very useful, but the API was always a bit cumbersome. Additionally, there was no paradigm of chaining trons, i.e. run multiple trons but bail out if one of them fails.
 
 ### Requirements
 
@@ -143,4 +143,4 @@ Train is a complete rewrite of its predecessor [operation](https://github.com/ha
 
 ### Copyright
 
-MIT 2015 halo. See [MIT-LICENSE](http://github.com/halo/train/blob/master/LICENSE.md).
+MIT 2015 halo. See [MIT-LICENSE](http://github.com/halo/tron/blob/master/LICENSE.md).

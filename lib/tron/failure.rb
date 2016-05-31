@@ -1,4 +1,4 @@
-module Train
+module Tron
   class Failure
     include Resultable
 

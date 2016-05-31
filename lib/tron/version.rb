@@ -1,4 +1,4 @@
-module Train
+module Tron
   module VERSION #:nodoc:
     MAJOR = 0
     MINOR = 1

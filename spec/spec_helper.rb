@@ -1,4 +1,4 @@
-require 'train'
+require 'tron'
 require 'hashie/mash' if ENV['LOAD_HASHIE'].to_s != ''
 
 RSpec.configure do |config|
