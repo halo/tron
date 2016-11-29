@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
 
   spec.name        = 'tron'
   spec.version     = ::Tron::VERSION::STRING
-  spec.date        = '2015-10-01'
+  spec.date        = '2016-11-29'
   spec.summary     = 'General-purpose method return objects that can be chained.'
   spec.description = "#{spec.summary} Heavily inspired by the `deterministic` gem, but much much more light-weight."
   spec.authors     = ['halo']
