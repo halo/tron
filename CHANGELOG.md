@@ -7,9 +7,10 @@ Breaking changes
 
 Features
 
-* Introduce `Tron.success` and `Tron.failure`, returning an (immutable) Struct
+* Introduce `Tron.success` and `Tron.failure`, returning an (immutable) Struct.
   This Api make it clearer where the method is defined - in the tron gem.
   Also, less overhead and more robust by not depending on class checking.
+  Also makes it obsolete to use `include Tron`.
 
 Deprecations
 
