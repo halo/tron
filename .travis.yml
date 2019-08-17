@@ -6,4 +6,3 @@ sudo: false
 script:
   - bundle exec rspec
   - LOAD_HASHIE=true bundle exec rspec
-  - bundle exec rubocop

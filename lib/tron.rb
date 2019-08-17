@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'tron/version'
 
 require 'tron/resultable' # Legady
