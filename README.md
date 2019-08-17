@@ -144,3 +144,7 @@ Tron is a complete rewrite of its predecessor [operation](https://github.com/hal
 ### Copyright
 
 MIT 2015 halo. See [MIT-LICENSE](http://github.com/halo/tron/blob/master/LICENSE.md).
+
+### TODO
+
+* Include in README that freezing is only top-level, see https://bugs.ruby-lang.org/issues/2509
