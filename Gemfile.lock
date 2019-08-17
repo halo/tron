@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tron (0.7.1)
+    tron (1.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -84,4 +84,4 @@ DEPENDENCIES
   tron!
 
 BUNDLED WITH
-   1.12.5
+   1.17.2
