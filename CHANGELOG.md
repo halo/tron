@@ -3,6 +3,7 @@
 Breaking changes
 
 * Raises minimum ruby version from 2.1.5 to 2.3.0
+* Removed #>> alias methods because it was ambiguously defined anyway (on_failure and on_success)
 
 Features
 

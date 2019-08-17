@@ -31,13 +31,14 @@ module Tron
 
     def code
       return if @code.to_s == ''
+
       @code.to_s.to_sym
     end
 
     # Convenience Wrapper
     def object
       metadata[:object] || metadata['object']
-    rescue
+    rescue StandardError
       nil
     end
 
@@ -60,6 +61,5 @@ module Tron
         ::Hashie::Mash.new
       end
     end
-
   end
 end

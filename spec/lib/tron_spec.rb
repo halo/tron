@@ -23,7 +23,7 @@ RSpec.describe Tron do
         result = described_class.success :alright
 
         expect(result).to be_a Struct
-        #expect(result.to_s).to eq '#<Tron.success code=:alright>'
+        # expect(result.to_s).to eq '#<Tron.success code=:alright>'
       end
 
       it 'is indifferent' do
@@ -53,8 +53,8 @@ RSpec.describe Tron do
           result.success.upcase!
         end.to raise_error RuntimeError # FrozenError as of Ruby 2.5
 
-        #expect(result.to_s).to eq '#<success success=:alright>'
-        #expect(result.inspect).to eq '#<success code=:alright>'
+        # expect(result.to_s).to eq '#<success success=:alright>'
+        # expect(result.inspect).to eq '#<success code=:alright>'
       end
     end
   end

@@ -1,12 +1,11 @@
 require 'spec_helper'
 
 RSpec.describe Tron::Failure do
-
   describe '#on_success' do
     context 'passing in a proc' do
       it 'returns self' do
         instance = described_class.new
-        expect(instance.on_success proc { :not_you }).to be instance
+        expect(instance.on_success(proc { :not_you })).to be instance
       end
     end
 
@@ -31,7 +30,7 @@ RSpec.describe Tron::Failure do
     context 'passing in a proc' do
       it 'calls the proc and returns its instance' do
         instance = described_class.new
-        expect(instance.on_failure proc { :bingo }).to eq :bingo
+        expect(instance.on_failure(proc { :bingo })).to eq :bingo
       end
     end
 
@@ -51,5 +50,4 @@ RSpec.describe Tron::Failure do
       end
     end
   end
-
 end

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 RSpec.shared_examples Tron::Resultable do
-
   describe '#metadata' do
     it 'may be nil' do
       result = described_class.call(:the_code, nil)
@@ -52,19 +51,16 @@ RSpec.shared_examples Tron::Resultable do
         expect(described_class.call(nil, nil).meta).to be_instance_of ::Hashie::Mash
         expect(described_class.call(nil, {}).meta).to be_instance_of ::Hashie::Mash
         expect(described_class.call(nil, one: { two: :three }).meta.one.two).to eq :three
-        expect(described_class.call(nil, []).meta).to eq []
-        expect(described_class.call(nil, 'wow').meta).to eq 'wow'
       else
         expect(described_class.new.meta).to be_nil
         expect(described_class.call(nil, nil).meta).to be_nil
         expect(described_class.call(nil, {}).meta).to be_instance_of ::Hash
         expect(described_class.call(nil, one: { two: :three }).meta).to eq one: { two: :three }
-        expect(described_class.call(nil, []).meta).to eq []
-        expect(described_class.call(nil, 'wow').meta).to eq 'wow'
       end
+      expect(described_class.call(nil, []).meta).to eq []
+      expect(described_class.call(nil, 'wow').meta).to eq 'wow'
     end
   end
-
 end
 
 RSpec.describe ::Tron::Success do
