@@ -16,6 +16,9 @@ module Tron
     def initialize(code: nil, metadata: nil)
       @code     = code
       @metadata = metadata
+      warn 'DEPRECATED: As of Tron 1.0.0 calls to `Tron::Success` and `Tron::Failure.call` are deprecated. ' \
+           'They will be removed in Tron 2.0.0. Please migrate using `Tron.success` and `Tron.failure`. ' \
+           'See github.com/halo/tron'
     end
 
     def success?

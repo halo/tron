@@ -1,16 +1,6 @@
 require 'spec_helper'
 
 RSpec.describe Tron do
-  context '' do
-    it 'bails out on the first failure' do
-      first  = described_class.success :alright
-      second = described_class.failure :problem
-      third  = described_class.success :never
-
-      expect(first.on_success { second }.on_success { third }).to be second
-    end
-  end
-
   describe '.success' do
     context 'without arguments' do
       it 'raises an error' do
@@ -26,7 +16,9 @@ RSpec.describe Tron do
 
         expect(result).to be_success
       end
+    end
 
+    context 'with metadata' do
       it 'is a struct' do
         result = described_class.success :alright
 
@@ -59,11 +51,21 @@ RSpec.describe Tron do
 
         expect do
           result.success.upcase!
-        end.to raise_error FrozenError
+        end.to raise_error RuntimeError # FrozenError as of Ruby 2.5
 
         #expect(result.to_s).to eq '#<success success=:alright>'
         #expect(result.inspect).to eq '#<success code=:alright>'
       end
+    end
+  end
+
+  context '' do
+    it 'bails out on the first failure' do
+      first  = described_class.success :alright
+      second = described_class.failure :problem
+      third  = described_class.success :never
+
+      expect(first.on_success { second }.on_success { third }).to be second
     end
   end
 end

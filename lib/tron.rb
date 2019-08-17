@@ -5,7 +5,7 @@ require 'tron/success' # Legacy
 require 'tron/failure' # Legacy
 
 module Tron
-  def self.success(code, attributes = {})
+  def self.success(code, attributes = {}) # rubocop:disable Metrics/MethodLength
     Struct.new(:success, *attributes.keys) do
       undef_method '[]='.to_sym
       members.each { |member| undef_method "#{member}=".to_sym }
@@ -28,7 +28,7 @@ module Tron
     end.new code.freeze, *attributes.values.map(&:freeze)
   end
 
-  def self.failure(code, attributes = {})
+  def self.failure(code, attributes = {}) # rubocop:disable Metrics/MethodLength
     Struct.new(:failure, *attributes.keys) do
       undef_method '[]='.to_sym
       members.each { |member| undef_method "#{member}=".to_sym }

@@ -1,11 +1,18 @@
 # 1.0.0
 
-Major changes
+Breaking changes
 
-* Deprecated `Tron::Success` and `Tron::Failure` classes altogether
+* Raises minimum ruby version from 2.1.5 to 2.3.0
+
+Features
+
 * Introduce `Tron.success` and `Tron.failure`, returning an (immutable) Struct
   This Api make it clearer where the method is defined - in the tron gem.
   Also, less overhead and more robust by not depending on class checking.
+
+Deprecations
+
+* Deprecated `Tron::Success` and `Tron::Failure` classes altogether
 
 # 0.7.1
 
