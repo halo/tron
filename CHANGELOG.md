@@ -1,3 +1,9 @@
+# 1.0.1
+
+Features
+
+* `on_success` and `on_failure` now yield the result-struct to their block
+
 # 1.0.0
 
 Breaking changes
