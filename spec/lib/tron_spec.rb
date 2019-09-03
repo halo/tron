@@ -90,6 +90,14 @@ RSpec.describe Tron do
 
         expect(result).to eq :bingo
       end
+
+      it 'yields its result' do
+        instance = described_class.success(:ok)
+        result = nil
+        instance.on_success(proc { |thing| result = thing })
+
+        expect(result).to be instance
+      end
     end
 
     context 'calling it with a block' do
@@ -98,6 +106,14 @@ RSpec.describe Tron do
         result = instance.on_success { :bingo }
 
         expect(result).to eq :bingo
+      end
+
+      it 'yields its result' do
+        instance = described_class.success(:ok)
+        result = nil
+        instance.on_success { |thing| result = thing }
+
+        expect(result).to be instance
       end
     end
 
@@ -208,19 +224,35 @@ RSpec.describe Tron do
   describe 'Struct#on_failure' do
     context 'with a proc' do
       it 'calls the proc and returns its instance' do
-        instance = described_class.failure(:ok)
-        result = instance.on_failure(proc { :bingo })
+        instance = described_class.failure(:oh_no)
+        result = instance.on_failure(proc { :boom })
 
-        expect(result).to eq :bingo
+        expect(result).to eq :boom
+      end
+
+      it 'yields its result' do
+        instance = described_class.failure(:oh_no)
+        result = nil
+        instance.on_failure(proc { |thing| result = thing })
+
+        expect(result).to be instance
       end
     end
 
     context 'calling it with a block' do
       it 'calls the block and returns its instance' do
-        instance = described_class.failure(:ok)
+        instance = described_class.failure(:too_bad)
         result = instance.on_failure { :bingo }
 
         expect(result).to eq :bingo
+      end
+
+      it 'yields its result' do
+        instance = described_class.failure(:too_bad)
+        result = nil
+        instance.on_failure { |thing| result = thing }
+
+        expect(result).to be instance
       end
     end
 

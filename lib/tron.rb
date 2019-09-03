@@ -11,7 +11,7 @@ module Tron
     code.respond_to?(:to_sym) ||
       raise(ArgumentError, 'Tron.success must be called with a Symbol as first argument')
 
-    attributes.respond_to?(:keys)||
+    attributes.respond_to?(:keys) ||
       raise(ArgumentError, 'The attributes Hash for Tron.success must respond to #keys')
 
     attributes.respond_to?(:values) ||
@@ -34,7 +34,7 @@ module Tron
       end
 
       def on_success(proc = nil, &block)
-        (proc || block).call
+        (proc || block).call self
       end
 
       def on_failure(_ = nil)
@@ -47,7 +47,7 @@ module Tron
     code.respond_to?(:to_sym) ||
       raise(ArgumentError, 'Tron.failure must be called with a Symbol as first argument')
 
-    attributes.respond_to?(:keys)||
+    attributes.respond_to?(:keys) ||
       raise(ArgumentError, 'The attributes Hash for Tron.failure must respond to #keys')
 
     attributes.respond_to?(:values) ||
@@ -74,7 +74,7 @@ module Tron
       end
 
       def on_failure(proc = nil, &block)
-        (proc || block).call
+        (proc || block).call self
       end
     end.new code.to_sym, *attributes.values.map(&:freeze)
   end
