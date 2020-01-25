@@ -33,6 +33,12 @@ module Tron
         nil
       end
 
+      def code
+        warn "DEPRECATION WARNING: Calling `#code` on a Tron object is deprecated and will be removed in Tron 2.0.0. Please use `#success` instead. Called from `#{caller.first}`"
+
+        success
+      end
+
       def on_success(proc = nil, &block)
         (proc || block).call self
       end
@@ -67,6 +73,12 @@ module Tron
 
       def success
         nil
+      end
+
+      def code
+        warn "DEPRECATION WARNING: Calling `#code` on a Tron object is deprecated and will be removed in Tron 2.0.0. Please use `#failure` instead. Called from `#{caller.first}`"
+
+        failure
       end
 
       def on_success(_ = nil)

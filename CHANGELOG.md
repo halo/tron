@@ -1,3 +1,12 @@
+# 1.1.1
+
+Changes
+
+* Added `#code` again for compatibility with Tron below version 1.0.0
+  This will make the upgrade path easier. In essence, you can use `1.0.0`
+  but you won't have to change your code at all.
+* Show caller stack when deprecated methods are called.
+
 # 1.0.1
 
 Features

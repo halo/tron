@@ -44,6 +44,7 @@ RSpec.describe Tron do
         expect(result).to be_success
         expect(result.success).to eq :alright
         expect(result.failure).to be nil
+        expect(result.code).to eq :alright
       end
     end
 
@@ -183,6 +184,7 @@ RSpec.describe Tron do
         expect(result).to be_failure
         expect(result.failure).to eq :too_bad
         expect(result.success).to be nil
+        expect(result.code).to eq :too_bad
       end
     end
 

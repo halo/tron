@@ -1,16 +1,5 @@
-# inherit_from: https://raw.githubusercontent.com/halo/dotfiles/master/dotfiles/rubocop.yml
+ inherit_from:
+   - https://raw.githubusercontent.com/halo/dotfiles/master/dotfiles/rubocop.yml
+   - https://raw.githubusercontent.com/halo/dotfiles/master/dotfiles/rubocop.rspec.yml
 
-AllCops:
-  DisplayCopNames: true
-
-# Does not recognize Struct.new blocks inside methods.
-Lint/NestedMethodDefinition:
-  Enabled: false
-
-# Even on an small screen this works fine.
-Metrics/LineLength:
-  Max: 130
-
-# Top-level class documentation is nice, but cumbersome when starting a new project.
-Style/Documentation:
-  Enabled: false
+TargetRubyVersion: 2.3
