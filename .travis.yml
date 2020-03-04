@@ -1,5 +1,7 @@
 language: ruby
-rvm: 2.3.0
+rvm:
+  - 2.3
+  - 2.7
 cache: bundler
 sudo: false
 

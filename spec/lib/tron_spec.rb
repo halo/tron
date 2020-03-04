@@ -110,7 +110,7 @@ RSpec.describe Tron do
       it 'raises an error' do
         expect do
           described_class.success :alright, success: :more_alright
-        end.to raise_error ArgumentError, 'duplicate member: success'
+        end.to raise_error
       end
     end
   end
@@ -281,7 +281,7 @@ RSpec.describe Tron do
         it 'raises an error' do
           expect do
             described_class.failure :alright, failure: :more_alright
-          end.to raise_error ArgumentError, 'duplicate member: failure'
+          end.to raise_error
         end
       end
     end
