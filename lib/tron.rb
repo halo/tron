@@ -2,24 +2,24 @@
 
 require 'tron/version'
 
-require 'tron/resultable' # Legady
+require 'tron/resultable' # Legacy
 require 'tron/success' # Legacy
 require 'tron/failure' # Legacy
 
 module Tron
-  def self.success(code, attributes = {}) # rubocop:disable Metrics/MethodLength
+  def self.success(code, attributes = {}) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     code.respond_to?(:to_sym) ||
       raise(ArgumentError, 'Tron.success must be called with a Symbol as first argument')
 
     attributes.respond_to?(:keys) ||
-      raise(ArgumentError, 'The attributes Hash for Tron.success must respond to #keys')
+      raise(ArgumentError, 'The second argument (metadata) for Tron.success must respond to #keys')
 
     attributes.respond_to?(:values) ||
-      raise(ArgumentError, 'The attributes Hash for Tron.success must respond to #values')
+      raise(ArgumentError, 'The second argument (metadata) for Tron.success must respond to #values')
 
     Struct.new(:success, *attributes.keys) do
-      undef_method '[]='.to_sym
-      members.each { |member| undef_method "#{member}=".to_sym }
+      undef_method :[]=
+      members.each { |member| undef_method :"#{member}=" }
 
       def success?
         true
@@ -34,7 +34,8 @@ module Tron
       end
 
       def code
-        warn "DEPRECATION WARNING: Calling `#code` on a Tron object is deprecated and will be removed in Tron 2.0.0. Please use `#success` instead. Called from `#{caller.first}`"
+        warn 'DEPRECATION WARNING: Calling `#code` on a Tron object is deprecated and will be removed in Tron 2.0.0. ' \
+             "Please use `#success` instead. Called from `#{caller.first}`"
 
         success
       end
@@ -49,19 +50,19 @@ module Tron
     end.new code.to_sym, *attributes.values.map(&:freeze)
   end
 
-  def self.failure(code, attributes = {}) # rubocop:disable Metrics/MethodLength
+  def self.failure(code, attributes = {}) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     code.respond_to?(:to_sym) ||
       raise(ArgumentError, 'Tron.failure must be called with a Symbol as first argument')
 
     attributes.respond_to?(:keys) ||
-      raise(ArgumentError, 'The attributes Hash for Tron.failure must respond to #keys')
+      raise(ArgumentError, 'The second argument (metadata) for Tron.failure must respond to #keys')
 
     attributes.respond_to?(:values) ||
-      raise(ArgumentError, 'The attributes Hash for Tron.failure must respond to #values')
+      raise(ArgumentError, 'The second argument (metadata) for Tron.failure must respond to #values')
 
     Struct.new(:failure, *attributes.keys) do
-      undef_method '[]='.to_sym
-      members.each { |member| undef_method "#{member}=".to_sym }
+      undef_method :[]=
+      members.each { |member| undef_method :"#{member}=" }
 
       def success?
         false
@@ -76,7 +77,8 @@ module Tron
       end
 
       def code
-        warn "DEPRECATION WARNING: Calling `#code` on a Tron object is deprecated and will be removed in Tron 2.0.0. Please use `#failure` instead. Called from `#{caller.first}`"
+        warn 'DEPRECATION WARNING: Calling `#code` on a Tron object is deprecated and will be removed in Tron 2.0.0. ' \
+             "Please use `#failure` instead. Called from `#{caller.first}`"
 
         failure
       end
