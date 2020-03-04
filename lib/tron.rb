@@ -47,7 +47,7 @@ module Tron
       def on_failure(_ = nil)
         self
       end
-    end.new code.to_sym, *attributes.values.map(&:freeze)
+    end.new code.to_sym, *attributes.values
   end
 
   def self.failure(code, attributes = {}) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
@@ -90,6 +90,6 @@ module Tron
       def on_failure(proc = nil, &block)
         (proc || block).call self
       end
-    end.new code.to_sym, *attributes.values.map(&:freeze)
+    end.new code.to_sym, *attributes.values
   end
 end
