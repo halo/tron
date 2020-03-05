@@ -5,6 +5,11 @@ rvm:
 cache: bundler
 sudo: false
 
+# Enable Bundler 2 on older Rubies
+before_install:
+  - yes | gem update --system --force
+  - gem install bundler
+
 script:
   - bundle exec rspec
   - LOAD_HASHIE=true bundle exec rspec
