@@ -1,3 +1,10 @@
+# 1.2.0
+
+Changes
+
+* Metadata is no longer frozen. When objects are returned from a method
+  they are usually not frozen either.
+
 # 1.1.1
 
 Changes
