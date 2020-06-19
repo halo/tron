@@ -142,7 +142,7 @@ You cannot simply test for the `false` as expected return value because it could
 
 ### 3. It gives you documentation
 
-While the code you're writing becomes slightly more verbose, that verbosity translates directly into documenation. You see immediately what each line is doing.
+While the code you're writing becomes slightly more verbose, that verbosity translates directly into documentation. You see immediately what each line is doing.
 
 ## Upgrading from 0.x.x to 1.x.x
 
