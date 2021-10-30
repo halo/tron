@@ -6,7 +6,7 @@
 
 Tron is a minimalistic combination of a [monad](https://www.morozov.is/2018/09/08/monad-laws-in-ruby.html) and [value object](https://madeintandem.com/blog/creating-value-objects-in-ruby/), implemented in [a few lines](https://github.com/halo/tron/blob/master/lib/tron.rb) of code.
 
-Return `Tron.success(:it_worked)` or `Tron.failure(:aww_too_bad)` from a method to explain why and how it succeded/failed. That returns an immutable Struct (value object) that responds to `result.success?` and `result.failure?`. 
+Return `Tron.success(:it_worked)` or `Tron.failure(:aww_too_bad)` from a method to explain why and how it succeded/failed. That returns an immutable Struct (value object) that responds to `result.success?` and `result.failure?`.
 
 The reason is accessible in `result.success #=> :it_worked`. You can add more metadata as a second argument: `Tron.failure(:nopes, error_code: 404)` which you can access like a Struct: `result.error_code #=> 404`.
 
@@ -64,13 +64,13 @@ class User
   def self.check_id_syntax(id)
     return Tron.failure(:id_missing) unless id
     return Tron.failure(:invalid_id, id: id) unless id.match /[a-f]{8}/
-    
+
     Tron.success :id_looks_good
   end
 
   def self.delete_user(id)
     user = @users[id]
-    
+
     if @users.delete id
       Tron.success :user_deleted, user: user
     else
@@ -144,6 +144,10 @@ You cannot simply test for the `false` as expected return value because it could
 
 While the code you're writing becomes slightly more verbose, that verbosity translates directly into documenation. You see immediately what each line is doing.
 
+## Upgrading from 1.x.x to 2.0.0
+
+* 1.2.0 and 2.0.0 are identical, except that all deprecations have been removed and don't work any more.
+
 ## Upgrading from 0.x.x to 1.x.x
 
 * Don't use `include Tron`, it is not useful any more. There are no subclasses you might want to access.
@@ -157,7 +161,7 @@ Tron is a complete rewrite of its predecessor [operation](https://github.com/hal
 
 ## Requirements
 
-* Ruby >= 2.3.0
+* Ruby >= 2.5.0
 
 ## Copyright
 

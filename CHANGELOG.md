@@ -1,3 +1,11 @@
+# 2.0.0
+
+Breaking Changes
+
+* Increase minimum ruby version from 2.3.0 to 2.5.0
+* Remove `#code` (it was deprecated for a long time)
+* Remove `Tron::Success` and `Tron::Failure` (use `Tron.success` and `Tron.failure` instead)
+
 # 1.2.0
 
 Changes

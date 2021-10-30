@@ -3,11 +3,10 @@
 require File.expand_path('lib/tron/version', __dir__)
 
 Gem::Specification.new do |spec|
-  spec.required_ruby_version = '>= 2.3.0'
+  spec.required_ruby_version = '>= 2.5.0'
 
   spec.name        = 'tron'
   spec.version     = ::Tron::VERSION::STRING
-  spec.date        = '2016-11-29'
   spec.summary     = 'General-purpose method return objects that can be chained.'
   spec.description = "#{spec.summary} Think minimalistic value object monads. " \
                      'Heavily inspired by the `deterministic` gem, but much much more light-weight.'
@@ -22,4 +21,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'hashie'
   spec.add_development_dependency 'rb-fsevent'
   spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'rubocop-rspec'
 end

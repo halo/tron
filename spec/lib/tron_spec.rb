@@ -44,7 +44,6 @@ RSpec.describe Tron do
         expect(result).to be_success
         expect(result.success).to eq :alright
         expect(result.failure).to be nil
-        expect(result.code).to eq :alright
       end
     end
 
@@ -110,7 +109,7 @@ RSpec.describe Tron do
       it 'raises an error' do
         expect do
           described_class.success :alright, success: :more_alright
-        end.to raise_error
+        end.to raise_error ArgumentError, /duplicate/
       end
     end
   end
@@ -133,7 +132,7 @@ RSpec.describe Tron do
       end
     end
 
-    context 'calling it with a block' do
+    context 'when calling it with a block' do
       it 'calls the block and returns its instance' do
         instance = described_class.success(:ok)
         result = instance.on_success { :bingo }
@@ -150,7 +149,7 @@ RSpec.describe Tron do
       end
     end
 
-    context 'chaining' do
+    context 'when chaining' do
       it 'calls everyone in the chain and returns the last result' do
         first  = described_class.success :way
         second = described_class.success :to
@@ -216,7 +215,6 @@ RSpec.describe Tron do
         expect(result).to be_failure
         expect(result.failure).to eq :too_bad
         expect(result.success).to be nil
-        expect(result.code).to eq :too_bad
       end
     end
 
@@ -252,37 +250,37 @@ RSpec.describe Tron do
           result.space_ship.upcase!
         end.to raise_error RuntimeError # FrozenError as of Ruby 2.5
       end
+    end
 
-      context 'when the attributes contain a :success key' do
-        it 'does not make the instance a success' do
-          result = described_class.failure :alright, success: :i_actually_meant_success
+    context 'when the attributes contain a :success key' do
+      it 'does not make the instance a success' do
+        result = described_class.failure :alright, success: :i_actually_meant_success
 
-          expect(result).to be_failure
-          expect(result).not_to be_success
-          expect(result.failure).to be :alright
-          expect(result.success).to be nil
-          expect(result.to_a).to eq %i[alright i_actually_meant_success]
-        end
+        expect(result).to be_failure
+        expect(result).not_to be_success
+        expect(result.failure).to be :alright
+        expect(result.success).to be nil
+        expect(result.to_a).to eq %i[alright i_actually_meant_success]
       end
+    end
 
-      context 'when the attributes contain a "success" key' do
-        it 'does not make the instance a success' do
-          result = described_class.failure :alright, 'success' => :i_actually_meant_success
+    context 'when the attributes contain a "success" key' do
+      it 'does not make the instance a success' do
+        result = described_class.failure :alright, 'success' => :i_actually_meant_success
 
-          expect(result).to be_failure
-          expect(result).not_to be_success
-          expect(result.failure).to be :alright
-          expect(result.success).to be nil
-          expect(result.to_a).to eq %i[alright i_actually_meant_success]
-        end
+        expect(result).to be_failure
+        expect(result).not_to be_success
+        expect(result.failure).to be :alright
+        expect(result.success).to be nil
+        expect(result.to_a).to eq %i[alright i_actually_meant_success]
       end
+    end
 
-      context 'when the attributes contain a :failure key' do
-        it 'raises an error' do
-          expect do
-            described_class.failure :alright, failure: :more_alright
-          end.to raise_error
-        end
+    context 'when the attributes contain a :failure key' do
+      it 'raises an error' do
+        expect do
+          described_class.failure :alright, failure: :more_alright
+        end.to raise_error ArgumentError, /duplicate/
       end
     end
   end
@@ -305,7 +303,7 @@ RSpec.describe Tron do
       end
     end
 
-    context 'calling it with a block' do
+    context 'when calling it with a block' do
       it 'calls the block and returns its instance' do
         instance = described_class.failure(:too_bad)
         result = instance.on_failure { :bingo }
@@ -322,7 +320,7 @@ RSpec.describe Tron do
       end
     end
 
-    context 'chaining' do
+    context 'when chaining' do
       it 'calls everyone in the chain and returns the last result' do
         first  = described_class.failure :way
         second = described_class.failure :to
