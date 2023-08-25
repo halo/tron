@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 3.2.0'
 
   spec.name        = 'tron'
-  spec.version     = ::Tron::VERSION::STRING
+  spec.version     = Tron::VERSION::STRING
   spec.summary     = 'General-purpose method return objects that can be chained.'
   spec.description = "#{spec.summary} Think minimalistic value object monads. " \
                      'Heavily inspired by the `deterministic` gem, but much much more light-weight.'
@@ -16,10 +16,5 @@ Gem::Specification.new do |spec|
   spec.files         = Dir['{lib}/**/*', 'README*', 'LICENSE.txt'] & `git ls-files -z`.split("\0")
   spec.licenses      = ['MIT']
   spec.require_paths = ['lib']
-
-  spec.add_development_dependency 'guard-rspec'
-  spec.add_development_dependency 'rb-fsevent'
-  spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'rubocop'
-  spec.add_development_dependency 'rubocop-rspec'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 end

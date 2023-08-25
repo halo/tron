@@ -3,7 +3,7 @@
 require 'tron/version'
 
 module Tron
-  def self.success(code, attributes = {}) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+  def self.success(code, attributes = {}) # rubocop:disable Metrics/MethodLength
     code.respond_to?(:to_sym) ||
       raise(ArgumentError, 'Tron.success must be called with a Symbol as first argument')
 
@@ -11,7 +11,8 @@ module Tron
       raise(ArgumentError, 'The second argument (metadata) for Tron.success must respond to #keys')
 
     attributes.respond_to?(:values) ||
-      raise(ArgumentError, 'The second argument (metadata) for Tron.success must respond to #values')
+      raise(ArgumentError,
+            'The second argument (metadata) for Tron.success must respond to #values')
 
     Data.define(:success, *attributes.keys) do
       def success?
@@ -36,7 +37,7 @@ module Tron
     end.new code.to_sym, *attributes.values
   end
 
-  def self.failure(code, attributes = {}) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+  def self.failure(code, attributes = {}) # rubocop:disable Metrics/MethodLength
     code.respond_to?(:to_sym) ||
       raise(ArgumentError, 'Tron.failure must be called with a Symbol as first argument')
 
@@ -44,7 +45,8 @@ module Tron
       raise(ArgumentError, 'The second argument (metadata) for Tron.failure must respond to #keys')
 
     attributes.respond_to?(:values) ||
-      raise(ArgumentError, 'The second argument (metadata) for Tron.failure must respond to #values')
+      raise(ArgumentError,
+            'The second argument (metadata) for Tron.failure must respond to #values')
 
     Data.define(:failure, *attributes.keys) do
       def success?

@@ -1,5 +1,5 @@
 module Tron
-  module VERSION #:nodoc:
+  module VERSION # :nodoc:
     MAJOR = 3
     MINOR = 0
     TINY  = 0

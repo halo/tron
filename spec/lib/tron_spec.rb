@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'ostruct'
 
 RSpec.describe Tron do
   describe '.success' do
@@ -17,23 +16,27 @@ RSpec.describe Tron do
       it 'raises an error' do
         expect do
           described_class.success nil
-        end.to raise_error ArgumentError, 'Tron.success must be called with a Symbol as first argument'
+        end.to raise_error ArgumentError,
+                           'Tron.success must be called with a Symbol as first argument'
 
         expect do
           described_class.success 42
-        end.to raise_error ArgumentError, 'Tron.success must be called with a Symbol as first argument'
+        end.to raise_error ArgumentError,
+                           'Tron.success must be called with a Symbol as first argument'
       end
     end
 
     context 'with non-hash-like attributes' do
       it 'raises an error' do
         expect do
-          described_class.success :bad, OpenStruct.new(values: :exists)
-        end.to raise_error ArgumentError, 'The second argument (metadata) for Tron.success must respond to #keys'
+          described_class.success :bad, Object.new
+        end.to raise_error ArgumentError,
+                           'The second argument (metadata) for Tron.success must respond to #keys'
 
         expect do
-          described_class.success :bad, OpenStruct.new(keys: :exists)
-        end.to raise_error ArgumentError, 'The second argument (metadata) for Tron.success must respond to #values'
+          described_class.success :bad, Data.define(:keys).new(nil)
+        end.to raise_error ArgumentError,
+                           'The second argument (metadata) for Tron.success must respond to #values'
       end
     end
 
@@ -43,7 +46,7 @@ RSpec.describe Tron do
 
         expect(result).to be_success
         expect(result.success).to eq :alright
-        expect(result.failure).to be nil
+        expect(result.failure).to be_nil
       end
     end
 
@@ -80,7 +83,7 @@ RSpec.describe Tron do
         expect(result).to be_success
         expect(result).not_to be_failure
         expect(result.success).to be :alright
-        expect(result.failure).to be nil
+        expect(result.failure).to be_nil
       end
     end
 
@@ -91,7 +94,7 @@ RSpec.describe Tron do
         expect(result).to be_success
         expect(result).not_to be_failure
         expect(result.success).to be :alright
-        expect(result.failure).to be nil
+        expect(result.failure).to be_nil
       end
     end
 
@@ -178,23 +181,27 @@ RSpec.describe Tron do
       it 'raises an error' do
         expect do
           described_class.failure nil
-        end.to raise_error ArgumentError, 'Tron.failure must be called with a Symbol as first argument'
+        end.to raise_error ArgumentError,
+                           'Tron.failure must be called with a Symbol as first argument'
 
         expect do
           described_class.failure 42
-        end.to raise_error ArgumentError, 'Tron.failure must be called with a Symbol as first argument'
+        end.to raise_error ArgumentError,
+                           'Tron.failure must be called with a Symbol as first argument'
       end
     end
 
     context 'with non-hash-like attributes' do
       it 'raises an error' do
         expect do
-          described_class.failure :bad, OpenStruct.new(values: :exists)
-        end.to raise_error ArgumentError, 'The second argument (metadata) for Tron.failure must respond to #keys'
+          described_class.failure :bad, Object.new
+        end.to raise_error ArgumentError,
+                           'The second argument (metadata) for Tron.failure must respond to #keys'
 
         expect do
-          described_class.failure :bad, OpenStruct.new(keys: :exists)
-        end.to raise_error ArgumentError, 'The second argument (metadata) for Tron.failure must respond to #values'
+          described_class.failure :bad, Data.define(:keys).new(nil)
+        end.to raise_error ArgumentError,
+                           'The second argument (metadata) for Tron.failure must respond to #values'
       end
     end
 
@@ -204,7 +211,7 @@ RSpec.describe Tron do
 
         expect(result).to be_failure
         expect(result.failure).to eq :too_bad
-        expect(result.success).to be nil
+        expect(result.success).to be_nil
       end
     end
 
@@ -241,7 +248,7 @@ RSpec.describe Tron do
         expect(result).to be_failure
         expect(result).not_to be_success
         expect(result.failure).to be :alright
-        expect(result.success).to be nil
+        expect(result.success).to be_nil
       end
     end
 
@@ -252,7 +259,7 @@ RSpec.describe Tron do
         expect(result).to be_failure
         expect(result).not_to be_success
         expect(result.failure).to be :alright
-        expect(result.success).to be nil
+        expect(result.success).to be_nil
       end
     end
 
