@@ -6,15 +6,12 @@
 
 Tron is a minimalistic combination of a [monad](https://www.morozov.is/2018/09/08/monad-laws-in-ruby.html) and [value object](https://madeintandem.com/blog/creating-value-objects-in-ruby/), implemented in [a few lines](https://github.com/halo/tron/blob/master/lib/tron.rb) of code.
 
-Return `Tron.success(:it_worked)` or `Tron.failure(:aww_too_bad)` from a method to explain why and how it succeded/failed. That returns an immutable Struct (value object) that responds to `result.success?` and `result.failure?`.
-
-The reason is accessible in `result.success #=> :it_worked`. You can add more metadata as a second argument: `Tron.failure(:nopes, error_code: 404)` which you can access like a Struct: `result.error_code #=> 404`.
-
-Chaining can make your code cleaner: `result.on_success { download }.on_failure { show_message }`
+* Return `Tron.success(:it_worked)` or `Tron.failure(:aww_too_bad)` from a method, to explain why and how it succeded or failed. That returns an immutable Data (value object) that responds to `result.success?` and `result.failure?`.
+* Add metadata as a second argument: `Tron.failure(:nopes, error_code: 404)` which you then can access: `result.error_code #=> 404`.
+* The result can also be queried with `result.success #=> :it_worked` and `result.failure #=> nil`.
+* Chaining can make your code cleaner: `result.on_success { download }.on_failure { show_message }`
 
 ## Introduction
-
-
 
 Imagine you have a class like this:
 
@@ -42,7 +39,7 @@ class User
     if @users.delete id
       Tron.success :user_deleted, user: user
     else
-      Tron.success :deletion_failed, id: id
+      Tron.success :already_deleted, id: id # Notice the success here
     end
 
   rescue ConnectionError
@@ -51,7 +48,7 @@ class User
 end
 ```
 
-One could even take it a step further and write it like this:
+One could break the functionality apart into smaller pieces:
 
 ```ruby
 class User
@@ -83,11 +80,20 @@ class User
 end
 ```
 
-## So what are the benefits?
+On a side-note, the data object can be passed on further with modifications, that's due to the way `Data` object work.
 
-### 1. It will give you robust and predictable code
+```ruby
+result = Tron.success(:api_not_responding, reason: :password_not_accepted)
 
-Tron will give you this consistent, implementation-unaware, programming convention:
+result.with(code: :could_not_delete_user)
+  # => "#<data failure=:could_not_delete_user, reason=:password_not_accepted>"
+```
+
+## So, what are the benefits?
+
+### 1. An internal API that doesn't change over time
+
+Tron will give you a consistent, implementation-unaware, programming convention. That means that you can decide later, what constitutes a success or a failure, without changing the way the result is handled. You could also add metadata after-the-fact and the following code would still work fine:
 
 ```ruby
 result = User.delete 42
@@ -99,7 +105,7 @@ else
 end
 ```
 
-The result is just a Struct:
+The result is just an instance of Data:
 
 ```ruby
 result = User.delete 42
@@ -114,9 +120,7 @@ result.failure # => :deletion_failed_badly
 
 # Access immutable metadata
 result.message # => "..."
-result.inspect # => "#<struct failure=:alright, user_id=42, message='...'>"
-
-result.message.upcase! # => modification raises an exception
+result.inspect # => "#<data failure=:alright, user_id=42, message='...'>"
 ```
 
 ### 2. If will give you better tests
@@ -138,15 +142,20 @@ class Product
 end
 ```
 
-You cannot simply test for the `false` as expected return value because it could mean anything. Tron helps you to check the response objects for every case.
+You cannot simply test for `false` as expected return value, because it could mean anything. Tron helps you to check the response objects for every case. Data objects even support deconstruction for `case` statements.
 
 ### 3. It gives you documentation
 
 While the code you're writing becomes slightly more verbose, that verbosity translates directly into documenation. You see immediately what each line is doing.
 
+## Upgrading from 2.0.0 to 3.0.0
+
+* You will need to use at least Ruby `3.2`
+* The result object doesn't respond to collection methods any more, such as `result[:some_key]` or `result.to_a`, but it's unlikely that you relied on them in the first place.
+
 ## Upgrading from 1.x.x to 2.0.0
 
-* 1.2.0 and 2.0.0 are identical, except that all deprecations have been removed and don't work any more.
+* `1.2.0` and `2.0.0` are identical, except that all deprecations have been removed and don't work any more.
 
 ## Upgrading from 0.x.x to 1.x.x
 
@@ -161,12 +170,12 @@ Tron is a complete rewrite of its predecessor [operation](https://github.com/hal
 
 ## Requirements
 
-* Ruby >= 2.5.0
+* Ruby >= 3.2.0
 
 ## Copyright
 
-MIT 2015-2019 halo. See [MIT-LICENSE](http://github.com/halo/tron/blob/master/LICENSE.md).
+MIT halo. See [MIT-LICENSE](http://github.com/halo/tron/blob/master/LICENSE.txt).
 
 ## Caveats
 
-* There are no setter methods in the returned Struct, so you cannot overwrite the metadata. The values are also frozen, so you don't accidentally modify the attributes in-place. However, they are not deep-frozen, so an object may still be modified if you're ignorant.
+* There are no setter methods in the returned Data, so you cannot overwrite the metadata. But you can use `Data#with` to essentially clone the object and change values.
