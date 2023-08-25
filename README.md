@@ -172,6 +172,10 @@ Tron is a complete rewrite of its predecessor [operation](https://github.com/hal
 
 * Ruby >= 3.2.0
 
+## Development
+
+Clone the repository, run `bundle install` and run the tests with `bundle exec rake`.
+
 ## Copyright
 
 MIT halo. See [MIT-LICENSE](http://github.com/halo/tron/blob/master/LICENSE.txt).
