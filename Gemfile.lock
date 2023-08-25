@@ -90,6 +90,7 @@ GEM
     shellany (0.0.1)
     thor (1.2.2)
     unicode-display_width (2.4.2)
+    uri (0.12.2)
 
 PLATFORMS
   ruby
@@ -101,6 +102,7 @@ DEPENDENCIES
   rubocop
   rubocop-rspec
   tron!
+  uri
 
 BUNDLED WITH
    2.2.27

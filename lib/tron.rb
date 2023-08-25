@@ -2,6 +2,7 @@
 
 require 'tron/version'
 
+# Return data objects that can indicate success or failure.
 module Tron
   def self.success(code, attributes = {}) # rubocop:disable Metrics/MethodLength
     code.respond_to?(:to_sym) ||
