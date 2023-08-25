@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 require 'tron'
-require 'hashie/mash' if ENV['LOAD_HASHIE'].to_s != ''
 
 RSpec.configure do |config|
   config.disable_monkey_patching!

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'ostruct'
 
 RSpec.describe Tron do
   describe '.success' do
@@ -17,23 +16,27 @@ RSpec.describe Tron do
       it 'raises an error' do
         expect do
           described_class.success nil
-        end.to raise_error ArgumentError, 'Tron.success must be called with a Symbol as first argument'
+        end.to raise_error ArgumentError,
+                           'Tron.success must be called with a Symbol as first argument'
 
         expect do
           described_class.success 42
-        end.to raise_error ArgumentError, 'Tron.success must be called with a Symbol as first argument'
+        end.to raise_error ArgumentError,
+                           'Tron.success must be called with a Symbol as first argument'
       end
     end
 
     context 'with non-hash-like attributes' do
       it 'raises an error' do
         expect do
-          described_class.success :bad, OpenStruct.new(values: :exists)
-        end.to raise_error ArgumentError, 'The second argument (metadata) for Tron.success must respond to #keys'
+          described_class.success :bad, Object.new
+        end.to raise_error ArgumentError,
+                           'The second argument (metadata) for Tron.success must respond to #keys'
 
         expect do
-          described_class.success :bad, OpenStruct.new(keys: :exists)
-        end.to raise_error ArgumentError, 'The second argument (metadata) for Tron.success must respond to #values'
+          described_class.success :bad, Data.define(:keys).new(nil)
+        end.to raise_error ArgumentError,
+                           'The second argument (metadata) for Tron.success must respond to #values'
       end
     end
 
@@ -43,26 +46,17 @@ RSpec.describe Tron do
 
         expect(result).to be_success
         expect(result.success).to eq :alright
-        expect(result.failure).to be nil
-        expect(result.code).to eq :alright
+        expect(result.failure).to be_nil
       end
     end
 
     context 'with code and attributes' do
-      it 'is an anonymous struct' do
+      it 'is an anonymous data' do
         result = described_class.success :alright
 
-        expect(result).to be_a Struct
+        expect(result).to be_a Data
         expect(result.to_h).to eq success: :alright
         expect(result.members).to eq [:success]
-      end
-
-      it 'has indifferent key access' do
-        result = described_class.success :alright
-
-        expect(result[:success]).to eq :alright
-        expect(result['success']).to eq :alright
-        expect(result[0]).to eq :alright
       end
 
       it 'has immutable attributes' do
@@ -89,8 +83,7 @@ RSpec.describe Tron do
         expect(result).to be_success
         expect(result).not_to be_failure
         expect(result.success).to be :alright
-        expect(result.failure).to be nil
-        expect(result.to_a).to eq %i[alright i_actually_meant_failure]
+        expect(result.failure).to be_nil
       end
     end
 
@@ -101,8 +94,7 @@ RSpec.describe Tron do
         expect(result).to be_success
         expect(result).not_to be_failure
         expect(result.success).to be :alright
-        expect(result.failure).to be nil
-        expect(result.to_a).to eq %i[alright i_actually_meant_failure]
+        expect(result.failure).to be_nil
       end
     end
 
@@ -110,12 +102,12 @@ RSpec.describe Tron do
       it 'raises an error' do
         expect do
           described_class.success :alright, success: :more_alright
-        end.to raise_error
+        end.to raise_error ArgumentError, /duplicate/
       end
     end
   end
 
-  describe 'Struct#on_success' do
+  describe 'Data#on_success' do
     context 'with a proc' do
       it 'calls the proc and returns its instance' do
         instance = described_class.success(:ok)
@@ -133,7 +125,7 @@ RSpec.describe Tron do
       end
     end
 
-    context 'calling it with a block' do
+    context 'when calling it with a block' do
       it 'calls the block and returns its instance' do
         instance = described_class.success(:ok)
         result = instance.on_success { :bingo }
@@ -150,7 +142,7 @@ RSpec.describe Tron do
       end
     end
 
-    context 'chaining' do
+    context 'when chaining' do
       it 'calls everyone in the chain and returns the last result' do
         first  = described_class.success :way
         second = described_class.success :to
@@ -189,23 +181,27 @@ RSpec.describe Tron do
       it 'raises an error' do
         expect do
           described_class.failure nil
-        end.to raise_error ArgumentError, 'Tron.failure must be called with a Symbol as first argument'
+        end.to raise_error ArgumentError,
+                           'Tron.failure must be called with a Symbol as first argument'
 
         expect do
           described_class.failure 42
-        end.to raise_error ArgumentError, 'Tron.failure must be called with a Symbol as first argument'
+        end.to raise_error ArgumentError,
+                           'Tron.failure must be called with a Symbol as first argument'
       end
     end
 
     context 'with non-hash-like attributes' do
       it 'raises an error' do
         expect do
-          described_class.failure :bad, OpenStruct.new(values: :exists)
-        end.to raise_error ArgumentError, 'The second argument (metadata) for Tron.failure must respond to #keys'
+          described_class.failure :bad, Object.new
+        end.to raise_error ArgumentError,
+                           'The second argument (metadata) for Tron.failure must respond to #keys'
 
         expect do
-          described_class.failure :bad, OpenStruct.new(keys: :exists)
-        end.to raise_error ArgumentError, 'The second argument (metadata) for Tron.failure must respond to #values'
+          described_class.failure :bad, Data.define(:keys).new(nil)
+        end.to raise_error ArgumentError,
+                           'The second argument (metadata) for Tron.failure must respond to #values'
       end
     end
 
@@ -215,26 +211,17 @@ RSpec.describe Tron do
 
         expect(result).to be_failure
         expect(result.failure).to eq :too_bad
-        expect(result.success).to be nil
-        expect(result.code).to eq :too_bad
+        expect(result.success).to be_nil
       end
     end
 
     context 'with code and attributes' do
-      it 'is an anonymous struct' do
+      it 'is an anonymous data' do
         result = described_class.failure :too_bad
 
-        expect(result).to be_a Struct
+        expect(result).to be_a Data
         expect(result.to_h).to eq failure: :too_bad
         expect(result.members).to eq [:failure]
-      end
-
-      it 'has indifferent key access' do
-        result = described_class.failure :too_bad
-
-        expect(result[:failure]).to eq :too_bad
-        expect(result['failure']).to eq :too_bad
-        expect(result[0]).to eq :too_bad
       end
 
       it 'has immutable attributes' do
@@ -252,42 +239,40 @@ RSpec.describe Tron do
           result.space_ship.upcase!
         end.to raise_error RuntimeError # FrozenError as of Ruby 2.5
       end
+    end
 
-      context 'when the attributes contain a :success key' do
-        it 'does not make the instance a success' do
-          result = described_class.failure :alright, success: :i_actually_meant_success
+    context 'when the attributes contain a :success key' do
+      it 'does not make the instance a success' do
+        result = described_class.failure :alright, success: :i_actually_meant_success
 
-          expect(result).to be_failure
-          expect(result).not_to be_success
-          expect(result.failure).to be :alright
-          expect(result.success).to be nil
-          expect(result.to_a).to eq %i[alright i_actually_meant_success]
-        end
+        expect(result).to be_failure
+        expect(result).not_to be_success
+        expect(result.failure).to be :alright
+        expect(result.success).to be_nil
       end
+    end
 
-      context 'when the attributes contain a "success" key' do
-        it 'does not make the instance a success' do
-          result = described_class.failure :alright, 'success' => :i_actually_meant_success
+    context 'when the attributes contain a "success" key' do
+      it 'does not make the instance a success' do
+        result = described_class.failure :alright, 'success' => :i_actually_meant_success
 
-          expect(result).to be_failure
-          expect(result).not_to be_success
-          expect(result.failure).to be :alright
-          expect(result.success).to be nil
-          expect(result.to_a).to eq %i[alright i_actually_meant_success]
-        end
+        expect(result).to be_failure
+        expect(result).not_to be_success
+        expect(result.failure).to be :alright
+        expect(result.success).to be_nil
       end
+    end
 
-      context 'when the attributes contain a :failure key' do
-        it 'raises an error' do
-          expect do
-            described_class.failure :alright, failure: :more_alright
-          end.to raise_error
-        end
+    context 'when the attributes contain a :failure key' do
+      it 'raises an error' do
+        expect do
+          described_class.failure :alright, failure: :more_alright
+        end.to raise_error ArgumentError, /duplicate/
       end
     end
   end
 
-  describe 'Struct#on_failure' do
+  describe 'Data#on_failure' do
     context 'with a proc' do
       it 'calls the proc and returns its instance' do
         instance = described_class.failure(:oh_no)
@@ -305,7 +290,7 @@ RSpec.describe Tron do
       end
     end
 
-    context 'calling it with a block' do
+    context 'when calling it with a block' do
       it 'calls the block and returns its instance' do
         instance = described_class.failure(:too_bad)
         result = instance.on_failure { :bingo }
@@ -322,7 +307,7 @@ RSpec.describe Tron do
       end
     end
 
-    context 'chaining' do
+    context 'when chaining' do
       it 'calls everyone in the chain and returns the last result' do
         first  = described_class.failure :way
         second = described_class.failure :to
@@ -344,6 +329,18 @@ RSpec.describe Tron do
                       .on_failure { third }
 
         expect(result).to be second
+      end
+    end
+  end
+
+  describe '.some_attribute' do
+    context 'when accessing an unknown attribute' do
+      it 'raises an informative error' do
+        instance = described_class.success :ok
+
+        expect do
+          instance.not_the_attribute_youre_looking_for
+        end.to raise_error NoMethodError, /#<data success=:ok>/
       end
     end
   end

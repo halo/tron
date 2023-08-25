@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Tron
-  module VERSION #:nodoc:
-    MAJOR = 1
-    MINOR = 1
+  module VERSION # :nodoc:
+    MAJOR = 3
+    MINOR = 0
     TINY  = 0
     PRE = nil
 

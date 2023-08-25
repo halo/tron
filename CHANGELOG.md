@@ -1,3 +1,31 @@
+# 3.0.0
+
+Breaking Changes
+
+* Increase minimum ruby version from 2.5.0 to 3.2.0
+* `Tron.success` and `Tron.failure` return an instance of `Data` rather than an instance of `Struct`
+* The returned class has no collection getters such as `[]` or `to_a`, so `Tron.success(:hi)[:success]` and `Tron.success(:hi).to_a` is not possible any more. That was never really intended to work, though.
+
+Minor Changes
+
+* Remove `hashie` gem from development dependencies. It remained there by accident in an earlier refactor.
+* Rename `LICENSE.md` to `LICENSE.txt` and remove the date (recently not legally needed any more).
+
+# 2.0.0
+
+Breaking Changes
+
+* Increase minimum ruby version from 2.3.0 to 2.5.0
+* Remove `#code` (it was deprecated for a long time)
+* Remove `Tron::Success` and `Tron::Failure` (use `Tron.success` and `Tron.failure` instead)
+
+# 1.2.0
+
+Changes
+
+* Metadata is no longer frozen. When objects are returned from a method
+  they are usually not frozen either.
+
 # 1.1.1
 
 Changes
