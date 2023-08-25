@@ -3,4 +3,4 @@ inherit_from:
   - https://raw.githubusercontent.com/halo/dotfiles/master/dotfiles/rubocop.rspec.yml
 
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 3.2

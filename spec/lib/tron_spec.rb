@@ -334,7 +334,7 @@ RSpec.describe Tron do
   end
 
   describe '.some_attribute' do
-    context 'accessing an unknown attribute' do
+    context 'when accessing an unknown attribute' do
       it 'raises an informative error' do
         instance = described_class.success :ok
 
