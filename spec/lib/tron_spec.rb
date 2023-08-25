@@ -48,7 +48,7 @@ RSpec.describe Tron do
     end
 
     context 'with code and attributes' do
-      it 'is an anonymous struct' do
+      it 'is an anonymous data' do
         result = described_class.success :alright
 
         expect(result).to be_a Data
@@ -81,7 +81,6 @@ RSpec.describe Tron do
         expect(result).not_to be_failure
         expect(result.success).to be :alright
         expect(result.failure).to be nil
-        expect(result.to_a).to eq %i[alright i_actually_meant_failure]
       end
     end
 
@@ -93,7 +92,6 @@ RSpec.describe Tron do
         expect(result).not_to be_failure
         expect(result.success).to be :alright
         expect(result.failure).to be nil
-        expect(result.to_a).to eq %i[alright i_actually_meant_failure]
       end
     end
 
@@ -106,7 +104,7 @@ RSpec.describe Tron do
     end
   end
 
-  describe 'Struct#on_success' do
+  describe 'Data#on_success' do
     context 'with a proc' do
       it 'calls the proc and returns its instance' do
         instance = described_class.success(:ok)
@@ -211,20 +209,12 @@ RSpec.describe Tron do
     end
 
     context 'with code and attributes' do
-      it 'is an anonymous struct' do
+      it 'is an anonymous data' do
         result = described_class.failure :too_bad
 
-        expect(result).to be_a Struct
+        expect(result).to be_a Data
         expect(result.to_h).to eq failure: :too_bad
         expect(result.members).to eq [:failure]
-      end
-
-      it 'has indifferent key access' do
-        result = described_class.failure :too_bad
-
-        expect(result[:failure]).to eq :too_bad
-        expect(result['failure']).to eq :too_bad
-        expect(result[0]).to eq :too_bad
       end
 
       it 'has immutable attributes' do
@@ -252,7 +242,6 @@ RSpec.describe Tron do
         expect(result).not_to be_success
         expect(result.failure).to be :alright
         expect(result.success).to be nil
-        expect(result.to_a).to eq %i[alright i_actually_meant_success]
       end
     end
 
@@ -264,7 +253,6 @@ RSpec.describe Tron do
         expect(result).not_to be_success
         expect(result.failure).to be :alright
         expect(result.success).to be nil
-        expect(result.to_a).to eq %i[alright i_actually_meant_success]
       end
     end
 
@@ -277,7 +265,7 @@ RSpec.describe Tron do
     end
   end
 
-  describe 'Struct#on_failure' do
+  describe 'Data#on_failure' do
     context 'with a proc' do
       it 'calls the proc and returns its instance' do
         instance = described_class.failure(:oh_no)
@@ -345,7 +333,7 @@ RSpec.describe Tron do
 
         expect do
           instance.not_the_attribute_youre_looking_for
-        end.to raise_error NoMethodError, /#<struct success=:ok>/
+        end.to raise_error NoMethodError, /#<data success=:ok>/
       end
     end
   end

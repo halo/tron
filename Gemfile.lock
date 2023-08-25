@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tron (2.0.0)
+    tron (3.0.0)
 
 GEM
   remote: https://rubygems.org/

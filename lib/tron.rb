@@ -47,9 +47,6 @@ module Tron
       raise(ArgumentError, 'The second argument (metadata) for Tron.failure must respond to #values')
 
     Data.define(:failure, *attributes.keys) do
-      undef_method :[]=
-      members.each { |member| undef_method :"#{member}=" }
-
       def success?
         false
       end
