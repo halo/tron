@@ -178,7 +178,7 @@ Clone the repository, run `bundle install` and run the tests with `bundle exec r
 
 ## Copyright
 
-MIT halo. See [MIT-LICENSE](http://github.com/halo/tron/blob/master/LICENSE.txt).
+MIT halo. See [LICENSE.txt](https://github.com/halo/tron/blob/master/LICENCE.txt).
 
 ## Caveats
 
