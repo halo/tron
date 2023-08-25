@@ -1,5 +1,5 @@
 [![Gem Version](https://img.shields.io/gem/v/tron.svg)](https://rubygems.org/gems/tron)
-[![Build Status](https://travis-ci.org/halo/tron.svg?branch=master)](https://travis-ci.org/halo/tron)
+[![Build Status](https://github.com/halo/tron/actions/workflows/main.yml/badge.svg)](https://github.com/halo/tron/actions)
 [![License](http://img.shields.io/badge/license-MIT-blue.svg)](http://github.com/halo/tron/blob/master/LICENSE.md)
 
 ## TL;DR
