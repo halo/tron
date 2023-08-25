@@ -13,10 +13,7 @@ module Tron
     attributes.respond_to?(:values) ||
       raise(ArgumentError, 'The second argument (metadata) for Tron.success must respond to #values')
 
-    Struct.new(:success, *attributes.keys) do
-      undef_method :[]=
-      members.each { |member| undef_method :"#{member}=" }
-
+    Data.define(:success, *attributes.keys) do
       def success?
         true
       end
@@ -49,7 +46,7 @@ module Tron
     attributes.respond_to?(:values) ||
       raise(ArgumentError, 'The second argument (metadata) for Tron.failure must respond to #values')
 
-    Struct.new(:failure, *attributes.keys) do
+    Data.define(:failure, *attributes.keys) do
       undef_method :[]=
       members.each { |member| undef_method :"#{member}=" }
 

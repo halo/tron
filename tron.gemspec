@@ -3,7 +3,7 @@
 require File.expand_path('lib/tron/version', __dir__)
 
 Gem::Specification.new do |spec|
-  spec.required_ruby_version = '>= 2.5.0'
+  spec.required_ruby_version = '>= 3.2.0'
 
   spec.name        = 'tron'
   spec.version     = ::Tron::VERSION::STRING
@@ -13,12 +13,11 @@ Gem::Specification.new do |spec|
   spec.authors     = ['halo']
   spec.homepage    = 'https://github.com/halo/tron'
 
-  spec.files         = Dir['{lib}/**/*', 'README*', 'LICENSE.md'] & `git ls-files -z`.split("\0")
+  spec.files         = Dir['{lib}/**/*', 'README*', 'LICENSE.txt'] & `git ls-files -z`.split("\0")
   spec.licenses      = ['MIT']
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'guard-rspec'
-  spec.add_development_dependency 'hashie'
   spec.add_development_dependency 'rb-fsevent'
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'rubocop'

@@ -51,17 +51,9 @@ RSpec.describe Tron do
       it 'is an anonymous struct' do
         result = described_class.success :alright
 
-        expect(result).to be_a Struct
+        expect(result).to be_a Data
         expect(result.to_h).to eq success: :alright
         expect(result.members).to eq [:success]
-      end
-
-      it 'has indifferent key access' do
-        result = described_class.success :alright
-
-        expect(result[:success]).to eq :alright
-        expect(result['success']).to eq :alright
-        expect(result[0]).to eq :alright
       end
 
       it 'has immutable attributes' do
@@ -342,6 +334,18 @@ RSpec.describe Tron do
                       .on_failure { third }
 
         expect(result).to be second
+      end
+    end
+  end
+
+  describe '.some_attribute' do
+    context 'accessing an unknown attribute' do
+      it 'raises an informative error' do
+        instance = described_class.success :ok
+
+        expect do
+          instance.not_the_attribute_youre_looking_for
+        end.to raise_error NoMethodError, /#<struct success=:ok>/
       end
     end
   end

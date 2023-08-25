@@ -12,4 +12,3 @@ before_install:
 
 script:
   - bundle exec rspec
-  - LOAD_HASHIE=true bundle exec rspec
