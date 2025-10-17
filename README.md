@@ -4,7 +4,7 @@
 
 ## TL;DR
 
-Tron is a minimalistic combination of a [monad](https://www.morozov.is/2018/09/08/monad-laws-in-ruby.html) and [value object](https://madeintandem.com/blog/creating-value-objects-in-ruby/), implemented in [a few lines](https://github.com/halo/tron/blob/master/lib/tron.rb) of code.
+Tron is a minimalistic combination of a [monad](https://www.morozov.is/2018/09/08/monad-laws-in-ruby/) and [value object](https://madeintandem.com/blog/creating-value-objects-in-ruby/), implemented in [a few lines](https://github.com/halo/tron/blob/master/lib/tron.rb) of code.
 
 * Return `Tron.success(:it_worked)` or `Tron.failure(:aww_too_bad)` from a method, to explain why and how it succeded or failed. That returns an immutable Data (value object) that responds to `result.success?` and `result.failure?`.
 * Add metadata as a second argument: `Tron.failure(:nopes, error_code: 404)` which you then can access: `result.error_code #=> 404`.
