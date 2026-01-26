@@ -340,7 +340,25 @@ RSpec.describe Tron do
 
         expect do
           instance.not_the_attribute_youre_looking_for
-        end.to raise_error NoMethodError, /#<data success=:ok>/
+        end.to raise_error NoMethodError, /#<data success>/
+      end
+    end
+  end
+
+  describe '.inspect' do
+    context 'success' do
+      it 'raises an informative error' do
+        instance = described_class.success :ok, some: %i[thing here]
+
+        expect(instance.inspect).to eq '#<data success=:ok, some=[:thing, :here]>'
+      end
+    end
+
+    context 'failure' do
+      it 'raises an informative error' do
+        instance = described_class.failure :bad, some: %i[thing here]
+
+        expect(instance.inspect).to eq '#<data failure=:bad, some=[:thing, :here]>'
       end
     end
   end

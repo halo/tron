@@ -35,6 +35,10 @@ module Tron
       def on_failure(_ = nil)
         self
       end
+
+      def self.inspect
+        "#<data #{members.join(', ')}>"
+      end
     end.new code.to_sym, *attributes.values
   end
 
@@ -68,6 +72,10 @@ module Tron
 
       def on_failure(proc = nil, &block)
         (proc || block).call self
+      end
+
+      def self.inspect
+        "#<data #{members.join(', ')}>"
       end
     end.new code.to_sym, *attributes.values
   end

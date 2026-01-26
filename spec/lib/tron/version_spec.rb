@@ -7,7 +7,7 @@ RSpec.describe Tron::VERSION do
     it 'is the current version' do
       version = described_class::STRING
 
-      expect(version).to eq '3.0.0'
+      expect(version).to eq '3.0.1'
     end
   end
 end

@@ -1,3 +1,11 @@
+# 3.0.1
+
+Minor Changes
+
+* Implement ´#inspect` so the content is shown.
+  This is similar to what a normal `Data` object would do.
+  But it wasn't implemented here because of the do/end definition.
+
 # 3.0.0
 
 Breaking Changes
